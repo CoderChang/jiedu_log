@@ -1,2 +1,3 @@
 # jiedu_log
-jiedu log web
+
+This is a simple website built with flask. It's made to analyze the log of jiedu dialogue data.
