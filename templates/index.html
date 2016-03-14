@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sds-jiedu</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link href="static/css/style.css" type="text/css" rel="stylesheet"/>
+    <script src="static/script/dropzone.js"></script>
+    <script src="static/script/d3.v3.min.js"></script>
+    <script src="static/script/jquery-latest.min.js"></script>
+</head>
+
+<body style="padding-top: 10px;">
+    <div id="footer">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input style="background-color:lightgray;" type="file" name="file">
+            <input type="submit" name="submit">
+        </form>
+    </div>
+
+    <div style="text-align:center;" id="frame_div">
+        <iframe id = "main_frame" sandbox="allow-scripts allow-forms allow-same-origin" src="/showjson" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    </div>
+    <script type="text/javascript">
+
+var w_max = window.innerWidth,
+    h_max = window.innerHeight;
+
+// margin: top, left, down, right
+var m = [10, 120, 10, 120],
+    w = w_max - m[1] - m[3],
+    h = h_max - m[0] - m[2];
+
+// set footer poisition
+$("#footer").css("top", h - 40);
+$("#footer").css("right", m[3]);
+
+d3.select("#main_frame")
+    .attr("width", w)
+    .attr("height", h);
+
+d3.select("#frame_div")
+    .attr("margin-top", m[0]);
+
+    </script>
+</body>
+</html>

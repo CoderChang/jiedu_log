@@ -1,0 +1,1558 @@
+{
+    "name": "root",
+    "count": 1165,
+    "prob": 1,
+    "level": 0,
+    "description": "",
+    "children": [
+        {
+            "name": "inf series",
+            "count": 276,
+            "prob": 0.2369098712446352,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "do / off entity",
+                    "count": 275,
+                    "prob": 0.9963768115942029,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf series",
+                            "count": 274,
+                            "prob": 0.9963636363636363,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "do / off entity",
+                                    "count": 274,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "success",
+                                            "count": 203,
+                                            "prob": 0.7408759124087592,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf series",
+                                            "count": 71,
+                                            "prob": 0.2591240875912409,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "do / off entity",
+                                                    "count": 71,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "success",
+                                                            "count": 55,
+                                                            "prob": 0.7746478873239436,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        },
+                                                        {
+                                                            "name": "inf series",
+                                                            "count": 16,
+                                                            "prob": 0.22535211267605634,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": [
+                                                                {
+                                                                    "name": "do / off entity",
+                                                                    "count": 16,
+                                                                    "prob": 1.0,
+                                                                    "level": 8,
+                                                                    "description": "",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "success",
+                                                                            "count": 7,
+                                                                            "prob": 0.4375,
+                                                                            "level": 9,
+                                                                            "description": "",
+                                                                            "children": []
+                                                                        },
+                                                                        {
+                                                                            "name": "inf series",
+                                                                            "count": 9,
+                                                                            "prob": 0.5625,
+                                                                            "level": 9,
+                                                                            "description": "",
+                                                                            "children": [
+                                                                                {
+                                                                                    "name": "do / off entity",
+                                                                                    "count": 9,
+                                                                                    "prob": 1.0,
+                                                                                    "level": 10,
+                                                                                    "description": "",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "name": "inf series",
+                                                                                            "count": 6,
+                                                                                            "prob": 0.6666666666666666,
+                                                                                            "level": 11,
+                                                                                            "description": "",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "name": "do / off entity",
+                                                                                                    "count": 6,
+                                                                                                    "prob": 1.0,
+                                                                                                    "level": 12,
+                                                                                                    "description": "",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "name": "success",
+                                                                                                            "count": 2,
+                                                                                                            "prob": 0.3333333333333333,
+                                                                                                            "level": 13,
+                                                                                                            "description": "",
+                                                                                                            "children": []
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "name": "success",
+                                                                                            "count": 3,
+                                                                                            "prob": 0.3333333333333333,
+                                                                                            "level": 11,
+                                                                                            "description": "",
+                                                                                            "children": []
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "success",
+                            "count": 1,
+                            "prob": 0.0036363636363636364,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf keyWord",
+            "count": 39,
+            "prob": 0.03347639484978541,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf keyWord / off entity",
+                    "count": 9,
+                    "prob": 0.23076923076923078,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf keyWord",
+                            "count": 6,
+                            "prob": 0.6666666666666666,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf keyWord / off entity",
+                                    "count": 6,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 5,
+                                            "prob": 0.8333333333333334,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 3,
+                            "prob": 0.3333333333333333,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "inf count / inf keyWord / req track",
+                    "count": 19,
+                    "prob": 0.48717948717948717,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 7,
+                            "prob": 0.3684210526315789,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "inf keyWord",
+                            "count": 12,
+                            "prob": 0.631578947368421,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf count / inf keyWord / req track",
+                                    "count": 12,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 7,
+                                            "prob": 0.5833333333333334,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf keyWord",
+                                            "count": 5,
+                                            "prob": 0.4166666666666667,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "inf count / inf keyWord / req track",
+                                                    "count": 5,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 4,
+                                                            "prob": 0.8,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf",
+            "count": 85,
+            "prob": 0.07296137339055794,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 53,
+                    "prob": 0.6235294117647059,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf",
+                            "count": 17,
+                            "prob": 0.32075471698113206,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "req category",
+                                    "count": 17,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 10,
+                                            "prob": 0.5882352941176471,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf",
+                                            "count": 7,
+                                            "prob": 0.4117647058823529,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "req category",
+                                                    "count": 7,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 5,
+                                                            "prob": 0.7142857142857143,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 36,
+                            "prob": 0.6792452830188679,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "inf category / inf count / inf keyWord / req album",
+                    "count": 7,
+                    "prob": 0.08235294117647059,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf",
+                            "count": 7,
+                            "prob": 1.0,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf category / inf count / inf keyWord / req album",
+                                    "count": 7,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 4,
+                                            "prob": 0.5714285714285714,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "inf count / inf keyWord / req track",
+                    "count": 5,
+                    "prob": 0.058823529411764705,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf",
+                            "count": 5,
+                            "prob": 1.0,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf count / inf keyWord / req track",
+                                    "count": 5,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "inf",
+                                            "count": 5,
+                                            "prob": 1.0,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "inf count / inf keyWord / req track",
+                                                    "count": 5,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 3,
+                                                            "prob": 0.6,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "inf album / inf count / inf keyWord / req album",
+                    "count": 9,
+                    "prob": 0.10588235294117647,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf",
+                            "count": 9,
+                            "prob": 1.0,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf album / inf count / inf keyWord / req album",
+                                    "count": 9,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 4,
+                                            "prob": 0.4444444444444444,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf",
+                                            "count": 5,
+                                            "prob": 0.5555555555555556,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "inf album / inf count / inf keyWord / req album",
+                                                    "count": 5,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 3,
+                                                            "prob": 0.6,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf object",
+            "count": 62,
+            "prob": 0.05321888412017167,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 61,
+                    "prob": 0.9838709677419355,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 49,
+                            "prob": 0.8032786885245902,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "inf object",
+                            "count": 12,
+                            "prob": 0.19672131147540983,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "req category",
+                                    "count": 12,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 6,
+                                            "prob": 0.5,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf object",
+                                            "count": 6,
+                                            "prob": 0.5,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "req category",
+                                                    "count": 6,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 4,
+                                                            "prob": 0.6666666666666666,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "bye",
+            "count": 226,
+            "prob": 0.19399141630901287,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "bye",
+                    "count": 226,
+                    "prob": 1.0,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "bye",
+                            "count": 220,
+                            "prob": 0.9734513274336283,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "bye",
+                                    "count": 220,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "bye",
+                                            "count": 108,
+                                            "prob": 0.4909090909090909,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "bye",
+                                                    "count": 108,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 64,
+                                                            "prob": 0.5925925925925926,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        },
+                                                        {
+                                                            "name": "bye",
+                                                            "count": 44,
+                                                            "prob": 0.4074074074074074,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": [
+                                                                {
+                                                                    "name": "bye",
+                                                                    "count": 44,
+                                                                    "prob": 1.0,
+                                                                    "level": 8,
+                                                                    "description": "",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "bye",
+                                                                            "count": 14,
+                                                                            "prob": 0.3181818181818182,
+                                                                            "level": 9,
+                                                                            "description": "",
+                                                                            "children": [
+                                                                                {
+                                                                                    "name": "bye",
+                                                                                    "count": 14,
+                                                                                    "prob": 1.0,
+                                                                                    "level": 10,
+                                                                                    "description": "",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "name": "bye",
+                                                                                            "count": 8,
+                                                                                            "prob": 0.5714285714285714,
+                                                                                            "level": 11,
+                                                                                            "description": "",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "name": "bye",
+                                                                                                    "count": 8,
+                                                                                                    "prob": 1.0,
+                                                                                                    "level": 12,
+                                                                                                    "description": "",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "name": "failure",
+                                                                                                            "count": 5,
+                                                                                                            "prob": 0.625,
+                                                                                                            "level": 13,
+                                                                                                            "description": "",
+                                                                                                            "children": []
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "name": "failure",
+                                                                                            "count": 6,
+                                                                                            "prob": 0.42857142857142855,
+                                                                                            "level": 11,
+                                                                                            "description": "",
+                                                                                            "children": []
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "name": "failure",
+                                                                            "count": 30,
+                                                                            "prob": 0.6818181818181818,
+                                                                            "level": 9,
+                                                                            "description": "",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "failure",
+                                            "count": 112,
+                                            "prob": 0.509090909090909,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 6,
+                            "prob": 0.02654867256637168,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf category / inf keyWord",
+            "count": 90,
+            "prob": 0.07725321888412018,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf category / inf count / inf keyWord / req album",
+                    "count": 55,
+                    "prob": 0.6111111111111112,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf category / inf keyWord",
+                            "count": 20,
+                            "prob": 0.36363636363636365,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf category / inf count / inf keyWord / req album",
+                                    "count": 20,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 10,
+                                            "prob": 0.5,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "inf category / inf keyWord",
+                                            "count": 10,
+                                            "prob": 0.5,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "inf category / inf count / inf keyWord / req album",
+                                                    "count": 10,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "inf category / inf keyWord",
+                                                            "count": 5,
+                                                            "prob": 0.5,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": [
+                                                                {
+                                                                    "name": "inf category / inf count / inf keyWord / req album",
+                                                                    "count": 5,
+                                                                    "prob": 1.0,
+                                                                    "level": 8,
+                                                                    "description": "",
+                                                                    "children": [
+                                                                        {
+                                                                            "name": "failure",
+                                                                            "count": 4,
+                                                                            "prob": 0.8,
+                                                                            "level": 9,
+                                                                            "description": "",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 5,
+                                                            "prob": 0.5,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 35,
+                            "prob": 0.6363636363636364,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "inf category / inf keyWord / off entity",
+                    "count": 10,
+                    "prob": 0.1111111111111111,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 6,
+                            "prob": 0.6,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "inf category / inf count / inf keyWord / req track",
+                    "count": 19,
+                    "prob": 0.2111111111111111,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 15,
+                            "prob": 0.7894736842105263,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf artist / inf keyWord",
+            "count": 18,
+            "prob": 0.015450643776824034,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf artist / inf count / inf keyWord / req track",
+                    "count": 17,
+                    "prob": 0.9444444444444444,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 11,
+                            "prob": 0.6470588235294118,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "inf artist / inf keyWord",
+                            "count": 6,
+                            "prob": 0.35294117647058826,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf artist / inf count / inf keyWord / req track",
+                                    "count": 6,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 6,
+                                            "prob": 1.0,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf category",
+            "count": 10,
+            "prob": 0.008583690987124463,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "do / off entity",
+                    "count": 8,
+                    "prob": 0.8,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "success",
+                            "count": 8,
+                            "prob": 1.0,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf album / inf keyWord",
+            "count": 77,
+            "prob": 0.06609442060085836,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf album / inf count / inf keyWord / req album",
+                    "count": 26,
+                    "prob": 0.33766233766233766,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 16,
+                            "prob": 0.6153846153846154,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "inf album / inf keyWord",
+                            "count": 10,
+                            "prob": 0.38461538461538464,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf album / inf count / inf keyWord / req album",
+                                    "count": 10,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 8,
+                                            "prob": 0.8,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "do / off entity",
+                    "count": 32,
+                    "prob": 0.4155844155844156,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "success",
+                            "count": 22,
+                            "prob": 0.6875,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "inf album / inf keyWord",
+                            "count": 10,
+                            "prob": 0.3125,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "do / off entity",
+                                    "count": 10,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "success",
+                                            "count": 9,
+                                            "prob": 0.9,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "inf album / inf count / inf keyWord / req track",
+                    "count": 6,
+                    "prob": 0.07792207792207792,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 4,
+                            "prob": 0.6666666666666666,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf keyWord / inf object / inf operation",
+            "count": 10,
+            "prob": 0.008583690987124463,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf keyWord / off entity",
+                    "count": 9,
+                    "prob": 0.9,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 8,
+                            "prob": 0.8888888888888888,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "res",
+            "count": 74,
+            "prob": 0.06351931330472103,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "cha chattype",
+                    "count": 74,
+                    "prob": 1.0,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 64,
+                            "prob": 0.8648648648648649,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "res",
+                            "count": 10,
+                            "prob": 0.13513513513513514,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "cha chattype",
+                                    "count": 10,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "res",
+                                            "count": 8,
+                                            "prob": 0.8,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": [
+                                                {
+                                                    "name": "cha chattype",
+                                                    "count": 8,
+                                                    "prob": 1.0,
+                                                    "level": 6,
+                                                    "description": "",
+                                                    "children": [
+                                                        {
+                                                            "name": "failure",
+                                                            "count": 5,
+                                                            "prob": 0.625,
+                                                            "level": 7,
+                                                            "description": "",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "failure",
+                                            "count": 2,
+                                            "prob": 0.2,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf album / inf keyWord / inf operation",
+            "count": 16,
+            "prob": 0.013733905579399141,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf album / inf count / inf keyWord / req album",
+                    "count": 12,
+                    "prob": 0.75,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 8,
+                            "prob": 0.6666666666666666,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf artist / inf category / inf keyWord",
+            "count": 57,
+            "prob": 0.048927038626609444,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf artist / inf category / inf count / inf keyWord / req track",
+                    "count": 38,
+                    "prob": 0.6666666666666666,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf artist / inf category / inf keyWord",
+                            "count": 11,
+                            "prob": 0.2894736842105263,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf artist / inf category / inf count / inf keyWord / req track",
+                                    "count": 11,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 8,
+                                            "prob": 0.7272727272727273,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 27,
+                            "prob": 0.7105263157894737,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "do / off entity",
+                    "count": 8,
+                    "prob": 0.14035087719298245,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "success",
+                            "count": 6,
+                            "prob": 0.75,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "inf artist / inf category / inf keyWord / off entity",
+                    "count": 5,
+                    "prob": 0.08771929824561403,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 4,
+                            "prob": 0.8,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf operation",
+            "count": 17,
+            "prob": 0.014592274678111588,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 14,
+                    "prob": 0.8235294117647058,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf operation",
+                            "count": 9,
+                            "prob": 0.6428571428571429,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "req category",
+                                    "count": 9,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 8,
+                                            "prob": 0.8888888888888888,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "failure",
+                            "count": 5,
+                            "prob": 0.35714285714285715,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf operation / res",
+            "count": 15,
+            "prob": 0.012875536480686695,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 15,
+                    "prob": 1.0,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 13,
+                            "prob": 0.8666666666666667,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf keyWord / inf object",
+            "count": 6,
+            "prob": 0.005150214592274678,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf count / inf keyWord / req track",
+                    "count": 5,
+                    "prob": 0.8333333333333334,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 4,
+                            "prob": 0.8,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf object / inf operation",
+            "count": 6,
+            "prob": 0.005150214592274678,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 6,
+                    "prob": 1.0,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 3,
+                            "prob": 0.5,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "inf album",
+            "count": 12,
+            "prob": 0.010300429184549357,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "inf album / inf count / req track",
+                    "count": 5,
+                    "prob": 0.4166666666666667,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "inf album",
+                            "count": 5,
+                            "prob": 1.0,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "inf album / inf count / req track",
+                                    "count": 5,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 5,
+                                            "prob": 1.0,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "do / off entity",
+                    "count": 5,
+                    "prob": 0.4166666666666667,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "success",
+                            "count": 1,
+                            "prob": 0.2,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "",
+            "count": 14,
+            "prob": 0.01201716738197425,
+            "level": 1,
+            "description": "",
+            "children": [
+                {
+                    "name": "req category",
+                    "count": 13,
+                    "prob": 0.9285714285714286,
+                    "level": 2,
+                    "description": "",
+                    "children": [
+                        {
+                            "name": "failure",
+                            "count": 8,
+                            "prob": 0.6153846153846154,
+                            "level": 3,
+                            "description": "",
+                            "children": []
+                        },
+                        {
+                            "name": "",
+                            "count": 5,
+                            "prob": 0.38461538461538464,
+                            "level": 3,
+                            "description": "",
+                            "children": [
+                                {
+                                    "name": "req category",
+                                    "count": 5,
+                                    "prob": 1.0,
+                                    "level": 4,
+                                    "description": "",
+                                    "children": [
+                                        {
+                                            "name": "failure",
+                                            "count": 3,
+                                            "prob": 0.6,
+                                            "level": 5,
+                                            "description": "",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "cha",
+            "count": 7,
+            "prob": 0.006008583690987125,
+            "level": 1,
+            "description": "",
+            "children": []
+        },
+        {
+            "name": "inf category / inf keyWord / inf operation",
+            "count": 5,
+            "prob": 0.004291845493562232,
+            "level": 1,
+            "description": "",
+            "children": []
+        },
+        {
+            "name": "inf album / inf category / inf keyWord",
+            "count": 5,
+            "prob": 0.004291845493562232,
+            "level": 1,
+            "description": "",
+            "children": []
+        }
+    ]
+}
