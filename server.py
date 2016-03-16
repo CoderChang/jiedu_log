@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -22,17 +23,26 @@ def show():
     return render_template('index.html')
 
 @app.route('/showjson')
-def test2():
+def showjson():
     return render_template('showjson.html')
 
 @app.route('/hehehe')
-def test():
+def hehehe():
     return render_template('hehehe.html')
 
 @app.route('/test')
-def test_iframe():
+def test():
     return render_template('test_iframe.html')
 
+@app.route('/showlog')
+def showlog():
+    logfile = request.args.get('logfile', '')
+    logpath = os.path.join('logs', 'jiedu1', logfile)
+    with open(logpath) as fff:
+        logjson = json.load(fff)
+        logjson = json.dumps(obj = logjson, ensure_ascii = False)
+        return render_template('showlog.html', logfile = logfile, logjson = logjson)
+    return "open file failed!"
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -50,4 +60,4 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

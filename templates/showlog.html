@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sds-jiedu</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="static/script/d3.v3.min.js"></script>
+    <script src="static/script/jquery-latest.min.js"></script>
+
+<style>
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+.string { color: green;  }
+.number { color: darkorange;  }
+.boolean { color: blue;  }
+.null { color: magenta;  }
+.key { color: red;  }
+</style>
+
+</head>
+
+<body style="padding-top: 10px;">
+    <div style="padding-left: 5px;">
+        <h1>
+            {{logfile}}
+        </h1>
+    </div>
+    <pre id="pre_json">
+    </pre>
+
+    <script type="text/javascript">
+
+logjson_str = '{{logjson}}'.replace(/&#34;/g, "\"");
+logjson = JSON.parse(logjson_str);
+
+$('#pre_json').html(syntaxHighlight(logjson));
+
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+
+    </script>
+</body>
+</html>
