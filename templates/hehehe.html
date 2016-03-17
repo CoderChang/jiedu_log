@@ -3,9 +3,12 @@
   <head>
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src="static/script/dropzone.js"></script>
+
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+
+    <script src="static/script/jquery.min.js"></script>
     <script src="static/script/d3.v3.min.js"></script>
-    <script src="static/script/jquery-latest.min.js"></script>
+    <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <style type="text/css">
 
 body {
@@ -55,9 +58,38 @@ path.link {
 }
 
     </style>
-  </head>
-  <body>
-    <div  id="body">
+    </head>
+    <body>
+
+    <div id="node_tip" class="hide thumbnail" style="padding: 0px; position: absolute; opacity: 0;">
+        <div class="caption" style="padding: 3px; background-color: lightgray;">
+            <h3 id="node_name" class="text-center" style="margin-top: 10px;">node name</h3>
+        </div>
+        <div class="caption" style="padding: 3px; margin-top: 5px;">
+            <table class="table table-striped table-condensed table-bordered" style="margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                    <th class="text-center">count</th>
+                    <th class="text-center">level</th>
+                    <th class="text-center">success</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td id="node_count">9999</td>
+                        <td id="node_level">0</td>
+                        <td id="node_success" style="color: red;">100.00%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-right">
+                <button id="bt_seelog" type="button" class="btn btn-info">查看日志</button>
+                <button id="bt_expandnode" type="button" class="btn btn-primary">展开节点</button>
+            </p>
+        </div>
+    </div>
+
+    <div id="body">
         <div id="footer">
             <button type="button" onclick="expandWholeTree();">展开</button>
             <button type="button" onclick="shrinkWholeTree();">收回</button>
@@ -194,10 +226,10 @@ function update(source) {
         .style("fill", function(d) { return d._children && d._children.length ? fill_color : empty_color; })
         .style("stroke", function(d) { return get_color(d.depth); })
         .on("mouseover", function(d) {
-            showToolTip(d, true);
+            node_onMouseOver(d);
         })
         .on("mouseout", function(d) {
-            showToolTip(d, false);
+            node_onMouseOut(d);
         })
 
     nodeEnter.append("svg:text")
@@ -332,20 +364,79 @@ function shrink(d) {
 }
 
 
-function showToolTip(d, pShow)
-{
-    var pMessage = "name: " + (d.name ? d.name : '-') + "<br>count :" + (d.count ? d.count : '-') + "<br>level :" + (d.level || d.level==0 ? d.level : '-') + "<br><span style=\"color:red;\">success: " + (d.success || d.success==0 ? (d.success*100).toFixed(2) + '%' : '-') + "</span>" + "<br><span>files: " + (d.files ? d.files.length : '-') + "</span>";
-    if (typeof(tooltipDivID)=="undefined")
-    {
-        tooltipDivID =$('<div id="messageToolTipDiv" style="position:absolute;display:block;z-index:10000;border:2px solid black;background-color:rgba(0,0,0,0.8);margin:auto;padding:3px 5px 3px 5px;color:white;font-size:12px;font-family:arial;border-radius: 5px;vertical-align: middle;text-align: center;min-width:50px;overflow:auto;"></div>');
-        $('body').append(tooltipDivID);
+node_tip = $("#node_tip");
+node_name = $("#node_name");
+node_count = $("#node_count");
+node_level = $("#node_level");
+node_success = $("#node_success");
+bt_seelog = $("#bt_seelog");
+bt_expandnode = $("#bt_expandnode");
+
+// flags
+tip_stay_flag = false;
+mouseout_tip_flag = true;
+
+d3.select("#node_tip")
+    .on("mouseover", function(d) {
+        tip_stay_flag = true;
+        if (!mouseout_tip_flag) {
+            d3.select("#node_tip").style("opacity",0.9);
+        }
+    })
+    .on("mouseout", function(d) {
+        mouseout_tip_flag = true;
+        tip_stay_flag = false;
+        setTimeout(function() {
+            if (!tip_stay_flag) {
+                d3.select("#node_tip").transition()
+                    .duration(500)
+                    .style("opacity", "0");
+            }
+        }, 1200);
+    })
+
+function node_onMouseOver(d) {
+    node_tip.removeClass("hide");
+    tip_stay_flag = true;
+
+    var name_val = d.name ? d.name : "-";
+    var count_val = d.count ? d.count : "-";
+    var level_val = d.level || d.level==0 ? d.level : "-";
+    var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + '%' : "-";
+
+    node_name.html(name_val);
+    node_count.html(count_val);
+    node_level.html(level_val);
+    node_success.html(success_val);
+    if ((d.children && d.children.length != 0) || (d._children && d._children.length != 0)) {
+        bt_expandnode.removeClass("hide");
+    } else {
+        bt_expandnode.addClass("hide");
     }
-    if (!pShow) { tooltipDivID.hide(); return; }
-    tooltipDivID.html(pMessage);
-    tooltipDivID.css({top: d3.event.pageY+20, left: d3.event.pageX+20});
-    tooltipDivID.show();
+    if (d.files && d.files.length != 0) {
+        bt_seelog.removeClass("hide");
+    } else {
+        bt_seelog.addClass("hide");
+    }
+
+    d3.select("#node_tip").transition()
+        .duration(200)
+        .style("opacity",0.9)
+        .style("left", (d3.event.pageX + 30) + "px")
+        .style("top", (d3.event.pageY + 20) + "px");
 }
 
+function node_onMouseOut(d) {
+    mouseout_tip_flag = false;
+    tip_stay_flag = false;
+    setTimeout(function() {
+        if (!tip_stay_flag) {
+            d3.select("#node_tip").transition()
+                .duration(500)
+                .style("opacity", "0");
+        }
+    }, 1200);
+}
     </script>
-  </body>
+    </body>
 </html>
