@@ -4,11 +4,12 @@
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-
     <script src="static/script/jquery.min.js"></script>
+    <script src="static/script/js.cookie.js"></script>
     <script src="static/script/d3.v3.min.js"></script>
     <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
 
 body {
@@ -83,8 +84,8 @@ path.link {
                 </tbody>
             </table>
             <p class="text-right">
-                <button id="bt_seelog" type="button" class="btn btn-info">查看日志</button>
-                <button id="bt_expandnode" type="button" class="btn btn-primary">展开节点</button>
+                <a id="bt_seelog" class="btn btn-info" href="/showlog" target="_blank">查看日志</a>
+                <button id="bt_expandnode" type="button" class="btn btn-primary" onclick="expandMouseOverNode();">展开节点</button>
             </p>
         </div>
     </div>
@@ -170,7 +171,7 @@ function toggleAll(d) {
     }
 }
 
-d3.json("uploads/hehe.json", function(json) {
+d3.json("uploads/tree.json", function(json) {
     root = json;
     root.x0 = h / 2;
     root.y0 = 0;
@@ -327,9 +328,18 @@ function toggle(d) {
 
 
 // Expand whole tree
-function expandWholeTree() {
-    root.children.forEach(expandAll);
-    update(root);
+function expandWholeTree(expand_node) {
+    if (typeof(expand_node) == "undefined") {
+        expand_node = root;
+    }
+
+    if (expand_node && expand_node._children) {
+        expand_node.children = expand_node._children;
+        expand_node._children = null;
+    }
+
+    expand_node.children.forEach(expandAll);
+    update(expand_node);
 }
 function expandAll(d) {
     if (d.children || d._children) {
@@ -372,6 +382,13 @@ node_success = $("#node_success");
 bt_seelog = $("#bt_seelog");
 bt_expandnode = $("#bt_expandnode");
 
+// current data
+var mouseover_data;
+
+function expandMouseOverNode() {
+    expandWholeTree(mouseover_data);
+}
+
 // flags
 tip_stay_flag = false;
 mouseout_tip_flag = true;
@@ -380,7 +397,9 @@ d3.select("#node_tip")
     .on("mouseover", function(d) {
         tip_stay_flag = true;
         if (!mouseout_tip_flag) {
-            d3.select("#node_tip").style("opacity",0.9);
+            d3.select("#node_tip")
+                .style("z-index", 1)
+                .style("opacity",0.9);
         }
     })
     .on("mouseout", function(d) {
@@ -390,12 +409,16 @@ d3.select("#node_tip")
             if (!tip_stay_flag) {
                 d3.select("#node_tip").transition()
                     .duration(500)
+                    .style("z-index", -1)
                     .style("opacity", "0");
             }
         }, 1200);
     })
 
 function node_onMouseOver(d) {
+    mouseover_data = d;
+    setLogFilesCookie();
+
     node_tip.removeClass("hide");
     tip_stay_flag = true;
 
@@ -421,6 +444,7 @@ function node_onMouseOver(d) {
 
     d3.select("#node_tip").transition()
         .duration(200)
+        .style("z-index", 1)
         .style("opacity",0.9)
         .style("left", (d3.event.pageX + 30) + "px")
         .style("top", (d3.event.pageY + 20) + "px");
@@ -433,10 +457,19 @@ function node_onMouseOut(d) {
         if (!tip_stay_flag) {
             d3.select("#node_tip").transition()
                 .duration(500)
+                .style("z-index", -1)
                 .style("opacity", "0");
         }
     }, 1200);
 }
+
+function setLogFilesCookie() {
+    if (mouseover_data.files) {
+        var log_files_arr = mouseover_data.files;
+        Cookies.set('log_files', log_files_arr.join(','));
+    }
+}
+
     </script>
     </body>
 </html>

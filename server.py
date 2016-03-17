@@ -36,13 +36,19 @@ def test():
 
 @app.route('/showlog')
 def showlog():
-    logfile = request.args.get('logfile', '')
+    return render_template('showlog.html')
+
+@app.route('/getlogjson', methods=['POST'])
+def getlogjson():
+    logfile = request.form['log_file']
+    print logfile
     logpath = os.path.join('logs', 'jiedu1', logfile)
     with open(logpath) as fff:
         logjson = json.load(fff)
         logjson = json.dumps(obj = logjson, ensure_ascii = False)
-        return render_template('showlog.html', logfile = logfile, logjson = logjson)
+        return logjson
     return "open file failed!"
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

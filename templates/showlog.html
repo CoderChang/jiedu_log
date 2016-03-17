@@ -3,39 +3,110 @@
 <head>
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src="static/script/d3.v3.min.js"></script>
-    <script src="static/script/jquery-latest.min.js"></script>
 
-<style>
+    <script src="static/script/jquery.min.js"></script>
+    <script src="static/script/js.cookie.js"></script>
+    <script src="static/script/d3.v3.min.js"></script>
+    <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <style type="text/css">
+
 pre {
     outline: 1px solid #ccc;
     padding: 5px;
     margin: 5px;
 }
+
 .string { color: green;  }
 .number { color: darkorange;  }
 .boolean { color: blue;  }
 .null { color: magenta;  }
 .key { color: red;  }
-</style>
+
+    </style>
 
 </head>
 
 <body style="padding-top: 10px;">
-    <div style="padding-left: 5px;">
-        <h1>
-            {{logfile}}
-        </h1>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-4">
+            <div id="div_table" style="overflow: auto;">
+                <h3 class="text-center">
+                    点击文件名查看完整日志
+                </h3>
+                <table class="table table-hover table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th class="text-center">
+                                日志文件名
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+                        <tr id="tr_template" class="hide" onclick="select_log(this);">
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                hehe.json
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <pre id="pre_json" style="overflow: auto;">
+            </pre>
+        </div>
     </div>
-    <pre id="pre_json">
-    </pre>
+</div>
 
     <script type="text/javascript">
 
-logjson_str = '{{logjson}}'.replace(/&#34;/g, "\"");
-logjson = JSON.parse(logjson_str);
+var w_max = window.innerWidth,
+    h_max = window.innerHeight;
 
-$('#pre_json').html(syntaxHighlight(logjson));
+var table_top = $("#div_table").offset().top;
+$('#div_table').height(h_max - table_top - 20);
+
+var pre_top = $("#pre_json").offset().top;
+$("#pre_json").height(h_max - pre_top - 20);
+
+var log_files_arr = Cookies.get('log_files').split(',');
+for (var i=0; i<log_files_arr.length; i++) {
+    var new_tr = $("#tr_template").clone(true);
+    new_tr.removeClass("hide");
+    new_tr.attr("id", "tr" + i);
+    new_tr.children()[0].innerHTML = i+1;
+    new_tr.children()[1].innerHTML = log_files_arr[i];
+
+    $("#table_body").append(new_tr);
+}
+
+
+function select_log(element) {
+    $("tr.info").removeClass("info");
+    $(element).addClass("info");
+
+    var log_file = $(element).children()[1].innerHTML;
+    $.post(
+        "/getlogjson",
+        {
+            log_file: log_file
+        },
+        function(data, status) {
+            logjson_str = data.replace(/&#34;/g, "\"");
+            logjson = JSON.parse(logjson_str);
+            $('#pre_json').html(syntaxHighlight(logjson));
+        });
+}
 
 function syntaxHighlight(json) {
     if (typeof json != 'string') {
