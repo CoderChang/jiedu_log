@@ -3,41 +3,42 @@
   <head>
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link href="static/img/favicon.ico" rel="shortcut icon" />
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="static/script/jquery.min.js"></script>
     <script src="static/script/js.cookie.js"></script>
     <script src="static/script/d3.v3.min.js"></script>
     <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
-    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
 
 body {
-  overflow: hidden;
-  margin: 0;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica;
+    overflow: hidden;
+    margin: 0;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica;
 }
 
 #footer {
-  position: absolute;
-  z-index: 1;
-  display: block;
-  font-size: 36px;
-  font-weight: 300;
-  text-shadow: 0 1px 0 #fff;
-  text-align: right;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    font-size: 36px;
+    font-weight: 300;
+    text-shadow: 0 1px 0 #fff;
+    text-align: right;
 }
 
 rect {
-  fill: none;
-  pointer-events: all;
+    fill: none;
+    pointer-events: all;
 }
 
 .node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke-width: 2px;
+    cursor: pointer;
+    fill: #fff;
+    stroke-width: 2px;
 }
 
 .node rect {
@@ -49,13 +50,14 @@ rect {
 }
 
 .node text {
-  font-size: 11px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 path.link {
-  fill: none;
-  stroke: gray;
-  stroke-width: 1.5px;
+    fill: none;
+    stroke: rgb(90, 12, 122);
+    stroke-width: 5px;
 }
 
     </style>
@@ -72,14 +74,16 @@ path.link {
                     <tr>
                     <th class="text-center">count</th>
                     <th class="text-center">level</th>
+                    <th class="text-center">prob</th>
                     <th class="text-center">success</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <tr>
-                        <td id="node_count">9999</td>
+                        <td id="node_count">0</td>
                         <td id="node_level">0</td>
-                        <td id="node_success" style="color: red;">100.00%</td>
+                        <td id="node_prob">0.00%</td>
+                        <td id="node_success" style="color: red;">0.00%</td>
                     </tr>
                 </tbody>
             </table>
@@ -92,8 +96,8 @@ path.link {
 
     <div id="body">
         <div id="footer">
-            <button type="button" onclick="expandWholeTree();">展开</button>
-            <button type="button" onclick="shrinkWholeTree();">收回</button>
+            <button type="button" class="btn btn-primary" onclick="expandWholeTree();">全部展开</button>
+            <button type="button" class="btn btn-default" onclick="shrinkWholeTree();">全部收回</button>
         </div>
     </div>
     <script type="text/javascript">
@@ -139,8 +143,12 @@ var zoom = d3.behavior.zoom()
     .scaleExtent([0.5,5])
     .on("zoom", zoom);
 
-var log_size = d3.scale.log()
+var node_log_size = d3.scale.log()
     .range([4,20]);
+
+var link_linear_opacity = d3.scale.linear()
+    .domain([-0.1,1.1])
+    .range([0.1,1]);
 
 var tree = d3.layout.tree()
     .size([h, w])
@@ -171,18 +179,20 @@ function toggleAll(d) {
     }
 }
 
-d3.json("uploads/tree.json", function(json) {
+d3.json(getUrlFromCookie(), function(json) {
     root = json;
-    root.x0 = h / 2;
-    root.y0 = 0;
+    if (root != null && root != 'failed') {
+        root.x0 = h / 2;
+        root.y0 = 0;
 
-    log_size.domain([1, root.count]);
+        node_log_size.domain([1, root.count]);
 
-    // Initialize the display to show a few nodes.
-    root.children.forEach(toggleAll);
-    //toggle(root.children[1]);
+        // Initialize the display to show a few nodes.
+        root.children.forEach(toggleAll);
+        //toggle(root.children[1]);
 
-    update(root);
+        update(root);
+    }
 });
 
 
@@ -190,7 +200,7 @@ function update(source) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
 
     var get_size = function (count) {
-        return log_size(count > 1 ? count : 1);
+        return node_log_size(count > 1 ? count : 1);
     }
     var get_color = function (depth) {
         return depth % 2 ? "royalblue" : "yellowgreen";
@@ -284,6 +294,7 @@ function update(source) {
     // Enter any new links at the parent's previous position.
     link.enter().insert("svg:path", "g")
         .attr("class", "link")
+        .style("opacity", function(d) { return link_linear_opacity(d.target.success ? d.target.success : 0); })
         .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
             return diagonal({source: o, target: o});
@@ -378,6 +389,7 @@ node_tip = $("#node_tip");
 node_name = $("#node_name");
 node_count = $("#node_count");
 node_level = $("#node_level");
+node_prob = $("#node_prob");
 node_success = $("#node_success");
 bt_seelog = $("#bt_seelog");
 bt_expandnode = $("#bt_expandnode");
@@ -408,7 +420,7 @@ d3.select("#node_tip")
         setTimeout(function() {
             if (!tip_stay_flag) {
                 d3.select("#node_tip").transition()
-                    .duration(500)
+                    .duration(400)
                     .style("z-index", -1)
                     .style("opacity", "0");
             }
@@ -425,11 +437,13 @@ function node_onMouseOver(d) {
     var name_val = d.name ? d.name : "-";
     var count_val = d.count ? d.count : "-";
     var level_val = d.level || d.level==0 ? d.level : "-";
+    var prob_val = d.prob || d.prob==0 ? (d.prob*100).toFixed(2) + '%' : "-";
     var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + '%' : "-";
 
     node_name.html(name_val);
     node_count.html(count_val);
     node_level.html(level_val);
+    node_prob.html(prob_val);
     node_success.html(success_val);
     if ((d.children && d.children.length != 0) || (d._children && d._children.length != 0)) {
         bt_expandnode.removeClass("hide");
@@ -456,7 +470,7 @@ function node_onMouseOut(d) {
     setTimeout(function() {
         if (!tip_stay_flag) {
             d3.select("#node_tip").transition()
-                .duration(500)
+                .duration(400)
                 .style("z-index", -1)
                 .style("opacity", "0");
         }
@@ -468,6 +482,13 @@ function setLogFilesCookie() {
         var log_files_arr = mouseover_data.files;
         Cookies.set('log_files', log_files_arr.join(','));
     }
+}
+
+// return the file path that json file is located in the server
+function getUrlFromCookie() {
+    var catalog_name = Cookies.get('catalog_name');
+    var domain_name = Cookies.get('domain_name');
+    return "/gettree?catalog_name=" + catalog_name + "&domain_name=" + domain_name;
 }
 
     </script>

@@ -3,13 +3,14 @@
 <head>
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link href="static/img/favicon.ico" rel="shortcut icon" />
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="static/script/jquery.min.js"></script>
     <script src="static/script/js.cookie.js"></script>
     <script src="static/script/d3.v3.min.js"></script>
     <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
-    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
 
 pre {
@@ -30,43 +31,43 @@ pre {
 
 <body style="padding-top: 10px;">
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-md-4">
-            <div id="div_table" style="overflow: auto;">
-                <h3 class="text-center">
-                    点击文件名查看完整日志
-                </h3>
-                <table class="table table-hover table-condensed table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                #
-                            </th>
-                            <th class="text-center">
-                                日志文件名
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="table_body">
-                        <tr id="tr_template" class="hide" onclick="select_log(this);">
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                hehe.json
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-4">
+                <div class="panel panel-primary" style="margin-bottom: 10px;">
+                    <div class="panel-heading text-center" style="margin-bottom: 8px;">点击文件名查看完整日志</div>
+                    <div id="div_table" style="overflow: auto;">
+                        <table class="table table-hover table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        日志文件名
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body">
+                                <tr id="tr_template" class="hide" onclick="select_log(this);">
+                                    <td>
+                                        0
+                                    </td>
+                                    <td>
+                                        template.json
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <pre id="pre_json" style="overflow: auto;">
+                </pre>
             </div>
         </div>
-        <div class="col-md-8">
-            <pre id="pre_json" style="overflow: auto;">
-            </pre>
-        </div>
     </div>
-</div>
 
     <script type="text/javascript">
 
@@ -74,10 +75,10 @@ var w_max = window.innerWidth,
     h_max = window.innerHeight;
 
 var table_top = $("#div_table").offset().top;
-$('#div_table').height(h_max - table_top - 20);
+$('#div_table').height(h_max - table_top - 15);
 
 var pre_top = $("#pre_json").offset().top;
-$("#pre_json").height(h_max - pre_top - 20);
+$("#pre_json").height(h_max - pre_top - 30);
 
 var log_files_arr = Cookies.get('log_files').split(',');
 for (var i=0; i<log_files_arr.length; i++) {
@@ -95,10 +96,12 @@ function select_log(element) {
     $("tr.info").removeClass("info");
     $(element).addClass("info");
 
+    var catalog_name = Cookies.get('catalog_name');
     var log_file = $(element).children()[1].innerHTML;
     $.post(
         "/getlogjson",
         {
+            catalog_name: catalog_name,
             log_file: log_file
         },
         function(data, status) {
