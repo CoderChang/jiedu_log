@@ -34,7 +34,15 @@ def get_all_logjson():
 
 @app.route('/')
 def show():
-    return render_template('index.html')
+    result = get_all_logjson()
+    resultjson = json.dumps(obj = result, ensure_ascii = False)
+    return render_template('index.html', resultjson = resultjson)
+
+@app.route('/test')
+def test():
+    result = get_all_logjson()
+    resultjson = json.dumps(obj = result, ensure_ascii = False)
+    return render_template('test_iframe.html', resultjson = resultjson)
 
 @app.route('/showjson')
 def showjson():
@@ -43,12 +51,6 @@ def showjson():
 @app.route('/hehehe')
 def hehehe():
     return render_template('hehehe.html')
-
-@app.route('/test')
-def test():
-    result = get_all_logjson()
-    resultjson = json.dumps(obj = result, ensure_ascii = False)
-    return render_template('test_iframe.html', resultjson = resultjson)
 
 @app.route('/showlog')
 def showlog():
@@ -92,4 +94,5 @@ def gettree():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    #app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')

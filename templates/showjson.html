@@ -3,13 +3,14 @@
   <head>
     <title>sds-jiedu</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link href="static/img/favicon.ico" rel="shortcut icon" />
+    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="static/script/jquery.min.js"></script>
     <script src="static/script/js.cookie.js"></script>
     <script src="static/script/d3.v3.min.js"></script>
     <script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
-    <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
 
 body {
@@ -22,11 +23,8 @@ body {
 #footer {
     position: absolute;
     z-index: 1;
-    display: block;
-    font-size: 36px;
-    font-weight: 300;
-    text-shadow: 0 1px 0 #fff;
-    text-align: right;
+    font-size: 30px;
+    right: 6px;
 }
 
 rect {
@@ -37,7 +35,7 @@ rect {
 .node circle {
     cursor: pointer;
     fill: #fff;
-    stroke-width: 2px;
+    stroke-width: 4px;
 }
 
 .node rect {
@@ -45,7 +43,7 @@ rect {
     rx: 2px;
     ry: 2px;
     fill: #fff;
-    stroke-width: 2px;
+    stroke-width: 4px;
 }
 
 .node text {
@@ -73,19 +71,21 @@ path.link {
                     <tr>
                     <th class="text-center">count</th>
                     <th class="text-center">level</th>
+                    <th class="text-center">prob</th>
                     <th class="text-center">success</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <tr>
-                        <td id="node_count">9999</td>
+                        <td id="node_count">0</td>
                         <td id="node_level">0</td>
-                        <td id="node_success" style="color: red;">100.00%</td>
+                        <td id="node_prob">0.00%</td>
+                        <td id="node_success" style="color: red;">0.00%</td>
                     </tr>
                 </tbody>
             </table>
             <p class="text-right">
-                <a id="bt_seelog" class="btn btn-info" href="/showlog" target="_self">查看日志</a>
+                <a id="bt_seelog" class="btn btn-info" href="/showlog" target="_blank">查看日志</a>
                 <button id="bt_expandnode" type="button" class="btn btn-primary" onclick="expandMouseOverNode();">展开节点</button>
             </p>
         </div>
@@ -93,8 +93,39 @@ path.link {
 
     <div id="body">
         <div id="footer">
-            <button type="button" class="btn btn-primary" onclick="expandWholeTree();">全部展开</button>
-            <button type="button" class="btn btn-default" onclick="shrinkWholeTree();">全部收回</button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn-sm btn btn-primary" onclick="expandWholeTree();">全展开</button>
+                <button type="button" class="btn-sm btn btn-default" onclick="shrinkWholeTree();">全收回</button>
+            </div>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-info" id ="data_panel">
+                    <div class="panel-heading" role="tab" id="heading" style="padding: 6px;">
+                        <h4 class="panel-title text-center">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="true" aria-controls="collapse">
+                                Legend
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
+                        <div class="panel-body" style="padding: 2px;">
+                            <table class="table table-condensed text-center" style="font-size: 14px; margin-bottom: 0px;">
+                                <tbody id="tbody_legend">
+                                    <tr>
+                                        <td>
+                                            方形：用户
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            圆形：系统
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -107,8 +138,77 @@ var m = [20, 120, 20, 120],
     h = h_max - m[0] - m[2],
     i = 0;
 
-// set footer poisition
-$("#footer").css("right", 5);
+// init legend and relative data structure
+var slot_other = "other...";
+var slot_arr = ["do", "affirm", "inform", "request", "null", "bye", "restart", "offer", "deny", "askrepeat", "chat"];
+slot_arr.sort();
+slot_arr[slot_arr.length] = slot_other;
+
+var color_map = {};
+var color_scale;
+if (slot_arr.length <=10) {
+    color_scale = d3.scale.category10();
+} else {
+    color_scale = d3.scale.category20();
+}
+
+tbody_legend = $("#tbody_legend");
+for (var ind=0; ind<slot_arr.length; ind++) {
+    color_map[slot_arr[ind].substring(0,3)] = color_scale(ind);
+
+    var tr = document.createElement("tr");
+    tr.style.backgroundColor = color_scale(ind);
+    var td = document.createElement("td");
+    td.innerHTML = slot_arr[ind];
+    tr.appendChild(td);
+    tbody_legend.append(tr);
+}
+
+// decide the right color according to the node"s name
+function decideColor(name) {
+    var tmp_colors = {};
+    var item_arr = name.replace(/ /g, "").split("/");
+    for (var ind=0; ind<item_arr.length; ind++) {
+        var key = item_arr[ind].substring(0,3)
+        tmp_colors[key] = color_map[key];
+    }
+
+    var basic_color = tmp_colors["inf"];
+    delete tmp_colors["inf"];
+    var advanced_color;
+    for (c in tmp_colors) {
+        advanced_color = tmp_colors[c];
+    }
+
+    if (typeof(advanced_color)!="undefined") {
+        return advanced_color;
+    } else if (typeof(basic_color)!="undefined") {
+        return basic_color;
+    } else {
+        return color_map[slot_other.substring(0,3)];
+    }
+}
+
+// record whether to collapse the legend or not
+collapse = $("#collapse");
+if (typeof(Cookies.get("legend_collapse")) == "string") {
+    var legend_collapse = Cookies.get("legend_collapse");
+    if (legend_collapse == "show") {
+        collapse.collapse("show");
+    } else {
+        Cookies.set("legend_collapse", "hide");
+        collapse.collapse("hide");
+    }
+} else {
+    Cookies.set("legend_collapse", "hide");
+    collapse.collapse("hide");
+}
+collapse.on("shown.bs.collapse", function() {
+    Cookies.set("legend_collapse", "show");
+}).on("hidden.bs.collapse", function() {
+    Cookies.set("legend_collapse", "hide");
+});
+
 
 var root;
 
@@ -145,7 +245,7 @@ var node_log_size = d3.scale.log()
 
 var link_linear_opacity = d3.scale.linear()
     .domain([-0.1,1.1])
-    .range([0.2,1]);
+    .range([0.1,1]);
 
 var tree = d3.layout.tree()
     .size([h, w])
@@ -176,18 +276,20 @@ function toggleAll(d) {
     }
 }
 
-d3.json("uploads/tree.json", function(json) {
+d3.json(getUrlFromCookie(), function(json) {
     root = json;
-    root.x0 = h / 2;
-    root.y0 = 0;
+    if (root != null && root != "failed") {
+        root.x0 = h / 2;
+        root.y0 = 0;
 
-    node_log_size.domain([1, root.count]);
+        node_log_size.domain([1, root.count]);
 
-    // Initialize the display to show a few nodes.
-    root.children.forEach(toggleAll);
-    //toggle(root.children[1]);
+        // Initialize the display to show a few nodes.
+        root.children.forEach(toggleAll);
+        //toggle(root.children[1]);
 
-    update(root);
+        update(root);
+    }
 });
 
 
@@ -200,7 +302,7 @@ function update(source) {
     var get_color = function (depth) {
         return depth % 2 ? "royalblue" : "yellowgreen";
     }
-    var fill_color = "lightsteelblue",
+    var fill_color = "lightgray",
         empty_color = "white"
 
     // Compute the new tree layout.
@@ -217,7 +319,7 @@ function update(source) {
     var node = vis.selectAll("g.node")
         .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-    // Enter any new nodes at the parent's previous position.
+    // Enter any new nodes at the parent"s previous position.
     var nodeEnter = node.enter().append("svg:g")
         .attr("class", "node")
         .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
@@ -230,7 +332,8 @@ function update(source) {
         .attr("height", function(d) { return 2*get_size(d.count)})
         .attr("r", function(d) { return get_size(d.count)})
         .style("fill", function(d) { return d._children && d._children.length ? fill_color : empty_color; })
-        .style("stroke", function(d) { return get_color(d.depth); })
+        //.style("stroke", function(d) { return get_color(d.depth); })
+        .style("stroke", function(d) { return decideColor(d.name); })
         .on("mouseover", function(d) {
             node_onMouseOver(d);
         })
@@ -256,16 +359,18 @@ function update(source) {
         .attr("width", function(d) { return 2*get_size(d.count)})
         .attr("height", function(d) { return 2*get_size(d.count)})
         .style("fill", function(d) { return d._children && d._children.length ? fill_color : empty_color; })
-        .style("stroke", function(d) { return get_color(d.depth); })
+        //.style("stroke", function(d) { return get_color(d.depth); })
+        .style("stroke", function(d) { return decideColor(d.name); })
     nodeUpdate.select("circle")
         .attr("r", function(d) { return get_size(d.count)})
         .style("fill", function(d) { return d._children && d._children.length ? fill_color : empty_color; })
-        .style("stroke", function(d) { return get_color(d.depth); })
+        //.style("stroke", function(d) { return get_color(d.depth); })
+        .style("stroke", function(d) { return decideColor(d.name); })
 
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
-    // Transition exiting nodes to the parent's new position.
+    // Transition exiting nodes to the parent"s new position.
     var nodeExit = node.exit().transition()
         .duration(duration)
         .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
@@ -286,7 +391,7 @@ function update(source) {
     var link = vis.selectAll("path.link")
         .data(tree.links(nodes), function(d) { return d.target.id; });
 
-    // Enter any new links at the parent's previous position.
+    // Enter any new links at the parent"s previous position.
     link.enter().insert("svg:path", "g")
         .attr("class", "link")
         .style("opacity", function(d) { return link_linear_opacity(d.target.success ? d.target.success : 0); })
@@ -303,7 +408,7 @@ function update(source) {
         .duration(duration)
         .attr("d", diagonal);
 
-    // Transition exiting nodes to the parent's new position.
+    // Transition exiting nodes to the parent"s new position.
     link.exit().transition()
         .duration(duration)
         .attr("d", function(d) {
@@ -384,6 +489,7 @@ node_tip = $("#node_tip");
 node_name = $("#node_name");
 node_count = $("#node_count");
 node_level = $("#node_level");
+node_prob = $("#node_prob");
 node_success = $("#node_success");
 bt_seelog = $("#bt_seelog");
 bt_expandnode = $("#bt_expandnode");
@@ -414,7 +520,7 @@ d3.select("#node_tip")
         setTimeout(function() {
             if (!tip_stay_flag) {
                 d3.select("#node_tip").transition()
-                    .duration(500)
+                    .duration(400)
                     .style("z-index", -1)
                     .style("opacity", "0");
             }
@@ -431,11 +537,13 @@ function node_onMouseOver(d) {
     var name_val = d.name ? d.name : "-";
     var count_val = d.count ? d.count : "-";
     var level_val = d.level || d.level==0 ? d.level : "-";
-    var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + '%' : "-";
+    var prob_val = d.prob || d.prob==0 ? (d.prob*100).toFixed(2) + "%" : "-";
+    var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + "%" : "-";
 
     node_name.html(name_val);
     node_count.html(count_val);
     node_level.html(level_val);
+    node_prob.html(prob_val);
     node_success.html(success_val);
     if ((d.children && d.children.length != 0) || (d._children && d._children.length != 0)) {
         bt_expandnode.removeClass("hide");
@@ -462,7 +570,7 @@ function node_onMouseOut(d) {
     setTimeout(function() {
         if (!tip_stay_flag) {
             d3.select("#node_tip").transition()
-                .duration(500)
+                .duration(400)
                 .style("z-index", -1)
                 .style("opacity", "0");
         }
@@ -472,8 +580,15 @@ function node_onMouseOut(d) {
 function setLogFilesCookie() {
     if (mouseover_data.files) {
         var log_files_arr = mouseover_data.files;
-        Cookies.set('log_files', log_files_arr.join(','));
+        Cookies.set("log_files", log_files_arr.join(","));
     }
+}
+
+// return the file path that json file is located in the server
+function getUrlFromCookie() {
+    var catalog_name = Cookies.get("catalog_name");
+    var domain_name = Cookies.get("domain_name");
+    return "/gettree?catalog_name=" + catalog_name + "&domain_name=" + domain_name;
 }
 
     </script>

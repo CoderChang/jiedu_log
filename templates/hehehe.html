@@ -106,7 +106,7 @@ path.link {
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading">
+                    <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
                         <div class="panel-body" style="padding: 2px;">
                             <table class="table table-condensed text-center" style="font-size: 14px; margin-bottom: 0px;">
                                 <tbody id="tbody_legend">
@@ -164,30 +164,51 @@ for (var ind=0; ind<slot_arr.length; ind++) {
     tbody_legend.append(tr);
 }
 
-// decide the right color according to the node's name
+// decide the right color according to the node"s name
 function decideColor(name) {
     var tmp_colors = {};
-    var item_arr = name.replace(/ /g, '').split('/');
+    var item_arr = name.replace(/ /g, "").split("/");
     for (var ind=0; ind<item_arr.length; ind++) {
         var key = item_arr[ind].substring(0,3)
         tmp_colors[key] = color_map[key];
     }
 
-    var basic_color = tmp_colors['inf'];
-    delete tmp_colors['inf'];
+    var basic_color = tmp_colors["inf"];
+    delete tmp_colors["inf"];
     var advanced_color;
     for (c in tmp_colors) {
         advanced_color = tmp_colors[c];
     }
 
-    if (typeof(advanced_color)!='undefined') {
+    if (typeof(advanced_color)!="undefined") {
         return advanced_color;
-    } else if (typeof(basic_color)!='undefined') {
+    } else if (typeof(basic_color)!="undefined") {
         return basic_color;
     } else {
         return color_map[slot_other.substring(0,3)];
     }
 }
+
+// record whether to collapse the legend or not
+collapse = $("#collapse");
+if (typeof(Cookies.get("legend_collapse")) == "string") {
+    var legend_collapse = Cookies.get("legend_collapse");
+    if (legend_collapse == "show") {
+        collapse.collapse("show");
+    } else {
+        Cookies.set("legend_collapse", "hide");
+        collapse.collapse("hide");
+    }
+} else {
+    Cookies.set("legend_collapse", "hide");
+    collapse.collapse("hide");
+}
+collapse.on("shown.bs.collapse", function() {
+    Cookies.set("legend_collapse", "show");
+}).on("hidden.bs.collapse", function() {
+    Cookies.set("legend_collapse", "hide");
+});
+
 
 var root;
 
@@ -257,7 +278,7 @@ function toggleAll(d) {
 
 d3.json(getUrlFromCookie(), function(json) {
     root = json;
-    if (root != null && root != 'failed') {
+    if (root != null && root != "failed") {
         root.x0 = h / 2;
         root.y0 = 0;
 
@@ -298,7 +319,7 @@ function update(source) {
     var node = vis.selectAll("g.node")
         .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-    // Enter any new nodes at the parent's previous position.
+    // Enter any new nodes at the parent"s previous position.
     var nodeEnter = node.enter().append("svg:g")
         .attr("class", "node")
         .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
@@ -349,7 +370,7 @@ function update(source) {
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
-    // Transition exiting nodes to the parent's new position.
+    // Transition exiting nodes to the parent"s new position.
     var nodeExit = node.exit().transition()
         .duration(duration)
         .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
@@ -370,7 +391,7 @@ function update(source) {
     var link = vis.selectAll("path.link")
         .data(tree.links(nodes), function(d) { return d.target.id; });
 
-    // Enter any new links at the parent's previous position.
+    // Enter any new links at the parent"s previous position.
     link.enter().insert("svg:path", "g")
         .attr("class", "link")
         .style("opacity", function(d) { return link_linear_opacity(d.target.success ? d.target.success : 0); })
@@ -387,7 +408,7 @@ function update(source) {
         .duration(duration)
         .attr("d", diagonal);
 
-    // Transition exiting nodes to the parent's new position.
+    // Transition exiting nodes to the parent"s new position.
     link.exit().transition()
         .duration(duration)
         .attr("d", function(d) {
@@ -516,8 +537,8 @@ function node_onMouseOver(d) {
     var name_val = d.name ? d.name : "-";
     var count_val = d.count ? d.count : "-";
     var level_val = d.level || d.level==0 ? d.level : "-";
-    var prob_val = d.prob || d.prob==0 ? (d.prob*100).toFixed(2) + '%' : "-";
-    var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + '%' : "-";
+    var prob_val = d.prob || d.prob==0 ? (d.prob*100).toFixed(2) + "%" : "-";
+    var success_val = d.success || d.success==0 ? (d.success*100).toFixed(2) + "%" : "-";
 
     node_name.html(name_val);
     node_count.html(count_val);
@@ -559,14 +580,14 @@ function node_onMouseOut(d) {
 function setLogFilesCookie() {
     if (mouseover_data.files) {
         var log_files_arr = mouseover_data.files;
-        Cookies.set('log_files', log_files_arr.join(','));
+        Cookies.set("log_files", log_files_arr.join(","));
     }
 }
 
 // return the file path that json file is located in the server
 function getUrlFromCookie() {
-    var catalog_name = Cookies.get('catalog_name');
-    var domain_name = Cookies.get('domain_name');
+    var catalog_name = Cookies.get("catalog_name");
+    var domain_name = Cookies.get("domain_name");
     return "/gettree?catalog_name=" + catalog_name + "&domain_name=" + domain_name;
 }
 
