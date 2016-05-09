@@ -577,10 +577,19 @@ function node_onMouseOut(d) {
     }, 1200);
 }
 
+function getNodePathArr(d) {
+    var path = [];
+    while(d) {
+        path.push(d.name);
+        d = d.parent;
+    }
+    return path.reverse();
+}
+
 function setLogFilesCookie() {
     if (mouseover_data.files) {
-        var log_files_arr = mouseover_data.files;
-        Cookies.set("log_files", log_files_arr.join(","));
+        var path = getNodePathArr(mouseover_data);
+        Cookies.set("mouseover_path", path.join(","));
     }
 }
 
