@@ -80,16 +80,36 @@ $('#div_table').height(h_max - table_top - 15);
 var pre_top = $("#pre_json").offset().top;
 $("#pre_json").height(h_max - pre_top - 30);
 
-var log_files_arr = Cookies.get('log_files').split(',');
-for (var i=0; i<log_files_arr.length; i++) {
-    var new_tr = $("#tr_template").clone(true);
-    new_tr.removeClass("hide");
-    new_tr.attr("id", "tr" + i);
-    new_tr.children()[0].innerHTML = i+1;
-    new_tr.children()[1].innerHTML = log_files_arr[i];
+var mouseover_path = Cookies.get('mouseover_path').split(',');
+$.get(
+    getUrlFromCookie(),
+    function(data, status) {
+        var root = data;
+        for (var i=1; i<mouseover_path.length; i++) {
+            var j = 0;
+            for (j=0; j<root.children.length; j++) {
+                if (root.children[j].name == mouseover_path[i]) {
+                    break;
+                }
+            }
+            if (j < root.children.length) {
+                root = root.children[j]
+            } else {
+                break;
+            }
+        }
 
-    $("#table_body").append(new_tr);
-}
+        var log_files_arr = root.files
+        for (var i=0; i<log_files_arr.length; i++) {
+            var new_tr = $("#tr_template").clone(true);
+            new_tr.removeClass("hide");
+            new_tr.attr("id", "tr" + i);
+            new_tr.children()[0].innerHTML = i+1;
+            new_tr.children()[1].innerHTML = log_files_arr[i];
+
+            $("#table_body").append(new_tr);
+        }
+    });
 
 
 function select_log(element) {
@@ -131,6 +151,13 @@ function syntaxHighlight(json) {
         }
         return '<span class="' + cls + '">' + match + '</span>';
     });
+}
+
+// return the file path that json file is located in the server
+function getUrlFromCookie() {
+    var catalog_name = Cookies.get("catalog_name");
+    var domain_name = Cookies.get("domain_name");
+    return "/gettree?catalog_name=" + catalog_name + "&domain_name=" + domain_name;
 }
 
     </script>
